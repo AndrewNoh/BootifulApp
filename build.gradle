@@ -15,14 +15,49 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+ext {
+    queryDslVersion = '5.1.0'
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Spring Boot 스타터
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+
+    // AWS SDK
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.764')
+    implementation 'com.amazonaws:aws-java-sdk-s3' // S3 관련 의존성 추가
+
+    // 데이터베이스
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
+    runtimeOnly 'com.h2database:h2' // H2 데이터베이스
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+    // DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // 테스트
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // JUnit 5 포함
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+tasks.withType(Test).configureEach {
+    useJUnitPlatform() // 모든 테스트에 대해 JUnit 플랫폼 사용 설정
 }
