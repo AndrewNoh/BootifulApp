@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev  # ?? ??? ????
+  application:
+    name: BootifulApp
+
+firebase:
+  config:
+    path: need firebase admin sdk
+
+# Swagger ??
+springdoc:
+  swagger-ui:
+    path: /index.html
+  api-docs:
+    path: /v3/api-docs

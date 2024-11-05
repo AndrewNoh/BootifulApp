@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://ec2-54-180-164-85.ap-northeast-2.compute.amazonaws.com:3306/public
+    username: andrew
+    password: test1234!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
